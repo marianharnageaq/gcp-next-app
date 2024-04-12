@@ -1,4 +1,4 @@
-FROM node:16-buster
+FROM node:18-alpine
 RUN mkdir /app
 COPY package.json /app/
 WORKDIR /app
@@ -8,5 +8,5 @@ COPY . ./
 
 RUN npm install
 RUN npm run build
-EXPOSE 4000
-CMD ["npm", "run","start"]
+EXPOSE 3000
+CMD ["npm", "run", "start"]
