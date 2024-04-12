@@ -1,12 +1,13 @@
-FROM node:18-alpine
-RUN mkdir /app
-COPY package.json /app/
+FROM node:14 AS build
 WORKDIR /app
-COPY . ./
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+COPY . .
 
-# ENV NEXT_PUBLIC_APP_URL=https://www.mydomain.com
-
-RUN npm install
-RUN npm run build
+RUN yarn build
+FROM node:14-alpine
+WORKDIR /app
+COPY --from=build /app .
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+
+CMD ["npm", "start"]
