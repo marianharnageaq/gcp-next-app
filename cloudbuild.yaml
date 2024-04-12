@@ -1,0 +1,23 @@
+steps:
+  # Step 1: Install npm dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+
+  # Step 2: Build the Next.js app
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+
+  # Step 3: Install the Cloud SDK
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['components', 'install', 'beta']
+
+  # Step 4: Deploy the built application to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'beta'
+      - 'run'
+      - 'deploy'
+      - 'todo-next-app'
+      - '--image=gcr.io/$PROJECT_ID/todo-next-app'
+      - '--region=europe-west10'
+      - '--platform=managed'
