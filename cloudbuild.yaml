@@ -13,6 +13,11 @@ steps:
     entrypoint: "npx"
     args: ["prisma", "migrate", "deploy", "--preview-feature"]
 
+  #  Run Prisma Seed
+  - name: "gcr.io/cloud-builders/npm"
+    entrypoint: "npx"
+    args: ["prisma", "db", "seed"]
+
   # Build the Next.js app
   - name: "gcr.io/cloud-builders/npm"
     args: ["run", "build"]
