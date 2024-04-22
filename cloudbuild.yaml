@@ -18,6 +18,6 @@ steps:
       - 'run'
       - 'deploy'
       - 'todo-next-app'
-      - '--image=gcr.io/$PROJECT_ID/todo-next-app'
+      - '--image=gcr.io/learning-project-416408/todo-next-app'
       - '--region=europe-west10'
       - '--platform=managed'
